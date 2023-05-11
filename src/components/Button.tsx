@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-function Button() {
+type Props = {
+  setCount: Function;
+  count: number;
+}
+
+const Button: FC<Props> = function(props) {
+  const { count, setCount } = props;
   return (
     <div>
-      <button>Button组件</button>
+      <button onClick={() => setCount(count + 1)}>count+1</button>
     </div>
   )
 }

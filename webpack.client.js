@@ -1,16 +1,13 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 
 // 服务端的webpack
 module.exports = merge(baseConfig, {
-  target: 'node',
   mode: 'development',
-  entry: './src/server/index.tsx',
-  externals: [nodeExternals()],
+  entry: './src/client/index.tsx',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'server_build')
+    path: path.resolve(__dirname, 'client_build')
   },
 })

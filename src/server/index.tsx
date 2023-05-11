@@ -1,12 +1,15 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import express from 'express';
-import App from '@/App';
+import App from '../App';
+import path from 'path';
 
 const app = express();
 
+app.use(express.static(path.resolve(process.cwd(), 'client_build')));
+
 app.get('/', (req, res) => {
-  const content = renderToString(<App />);
+  const content = renderToString(<App title="hello world"/>);
   res.send(`
     <html>
       <head>
@@ -15,6 +18,7 @@ app.get('/', (req, res) => {
       </head>
       <body>
         <div id="root">${content}</div>
+        <script src="./bundle.js"></script>
       </body>
     </html>
   `)
