@@ -9,9 +9,9 @@
       "moduleResolution": "node",
       "allowSyntheticDefaultImports": true,
       "esModuleInterop": true,
-      "baseUrl": "./",
+      "baseUrl": ".",
       "paths": {
-        "@/*": ["./src/*"] // webpack 配置别名，但在TS中会报红找不到，所以tslint也需要配置
+        "@/*": ["src/*"] // webpack 配置别名，但在TS中会报红找不到，所以tslint也需要配置
       },
       "importHelpers": true
     }

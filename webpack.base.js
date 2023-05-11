@@ -17,7 +17,8 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
     alias: {
-      '@/': path.resolve(__dirname, 'src')
+      // 直接@就行，不要@/，不然webpack在打包路径别名的文件时会报错
+      '@': path.resolve(__dirname, 'src')  
     }
   }
 }
