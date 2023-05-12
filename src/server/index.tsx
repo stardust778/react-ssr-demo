@@ -1,5 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom/server';
 import express from 'express';
 import App from '@/App';
 import path from 'path';
@@ -8,8 +9,12 @@ const app = express();
 
 app.use(express.static(path.resolve(process.cwd(), 'client_build')));
 
-app.get('/', (req, res) => {
-  const content = renderToString(<App title="hello world"/>);
+app.get('*', (req, res) => {
+  const content = renderToString(
+    <StaticRouter location={req.url}>
+      <App title="hello world"/>
+    </StaticRouter>
+  );
   res.send(`
     <html>
       <head>
