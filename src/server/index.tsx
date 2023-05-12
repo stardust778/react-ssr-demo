@@ -4,6 +4,8 @@ import { StaticRouter } from 'react-router-dom/server';
 import express from 'express';
 import App from '@/App';
 import path from 'path';
+import store from '@/store';
+import { Provider } from 'react-redux';
 
 const app = express();
 
@@ -11,9 +13,11 @@ app.use(express.static(path.resolve(process.cwd(), 'client_build')));
 
 app.get('*', (req, res) => {
   const content = renderToString(
-    <StaticRouter location={req.url}>
-      <App title="hello world"/>
-    </StaticRouter>
+    <Provider store={store}>
+      <StaticRouter location={req.url}>
+        <App />
+      </StaticRouter>
+    </Provider>
   );
   res.send(`
     <html>
