@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import store from '@/store';
 import { Provider } from 'react-redux';
-import App from '@/App';
+import App from '@/pages/App';
 
 ReactDOM.hydrate(
-  <Provider store={store}>
+  <Provider store={store.clientStore}>
     <BrowserRouter>
       <App />
     </BrowserRouter>,

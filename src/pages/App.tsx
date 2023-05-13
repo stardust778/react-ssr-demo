@@ -1,15 +1,18 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import Button from './components/Button';
-import routes from './router';
+import routes from '../router';
 import { useAppSelector, useAppDisaptch } from '@/store';
-import { addCount } from '@/store/indexSlice';
+import { addCount, getIndexList } from '@/store/indexSlice';
 
 
 const App: FC = function() {
-  // const [count, setCount] = useState<number>(0);
-  const { count, title } = useAppSelector((state) => state.index);
+  const { count, title, list } = useAppSelector((state) => state.index);
   const dispatch = useAppDisaptch();
+
+  useEffect(() => {
+    dispatch(getIndexList());
+  }, [dispatch]);
+
   return (
     <div>
       App { title }
@@ -22,6 +25,14 @@ const App: FC = function() {
           <Route path={item.path} Component={item.element} key={index} />
         )}
       </Routes>
+
+      <div>
+        <ul>
+          {list.map((item, index) => 
+            <li key={item.id}>{item.name}</li>
+          )}
+        </ul>
+      </div>
     </div>
   )
 }

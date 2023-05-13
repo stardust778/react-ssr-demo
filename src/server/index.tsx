@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import express from 'express';
-import App from '@/App';
+import App from '@/pages/App';
 import path from 'path';
 import store from '@/store';
 import { Provider } from 'react-redux';
@@ -13,7 +13,7 @@ app.use(express.static(path.resolve(process.cwd(), 'client_build')));
 
 app.get('*', (req, res) => {
   const content = renderToString(
-    <Provider store={store}>
+    <Provider store={store.serverStore}>
       <StaticRouter location={req.url}>
         <App />
       </StaticRouter>
