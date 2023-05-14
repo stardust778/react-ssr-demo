@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import store from '@/store';
 import { Provider } from 'react-redux';
-import App from '@/pages/App';
+import routes from '@/router';
+import PageViews from '@/utils/renderRoutes';
 
 ReactDOM.hydrate(
   <Provider store={store.clientStore}>
     <BrowserRouter>
-      <App />
+        {PageViews(routes)}
     </BrowserRouter>,
   </Provider>,
   document.getElementById('root')

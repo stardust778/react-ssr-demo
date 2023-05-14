@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
 
 const About: FC = function() {
-  return <h1>About组件</h1>
+  return (
+    <div>About组件</div>
+  )
 }
 
 export default About;
