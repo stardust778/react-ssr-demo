@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+// 递归渲染嵌套路由函数
 function renderRoutes(routes: IRoutes[]) {
   if (routes && routes.length) {
     return routes.map((route) => {
