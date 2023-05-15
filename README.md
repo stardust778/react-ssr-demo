@@ -8,6 +8,6 @@
 
 ## √ 接入 ts-node
 
-## Redux 同构
+## √ Redux 同构
 
 ## 客户端获取 context 数据渲染

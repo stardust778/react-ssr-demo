@@ -1,12 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useSelector, useDispatch, TypedUseSelectorHook } from 'react-redux';
+// import { clientStore } from '@/client';
 import indexSlice from './indexSlice';
-
-const clientStore = configureStore({
-  reducer: {
-    index: indexSlice
-  }
-});
 
 const serverStore = configureStore({
   reducer: {
@@ -14,9 +9,25 @@ const serverStore = configureStore({
   }
 })
 
-export type RootState = ReturnType<typeof clientStore.getState>;
+// declare var window: any;
+// const isBrowser = typeof window !== 'undefined';
+// const globalObject = isBrowser ? window : {};
+
+// const preloadedState = 
+//   globalObject._context.state 
+//     ? globalObject._context.state 
+//     : (global as any)._context.state;
+
+const clientStore = configureStore({
+  reducer: {
+    index: indexSlice
+  },
+  // preloadedState
+});
+
+export type RootState = ReturnType<typeof serverStore.getState>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-export type AppDispatch = typeof clientStore.dispatch;
+export type AppDispatch = typeof serverStore.dispatch;
 export const useAppDisaptch = () => useDispatch<AppDispatch>();
 
-export default { clientStore, serverStore };
+export { serverStore };

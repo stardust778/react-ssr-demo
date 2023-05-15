@@ -1,9 +1,6 @@
 import { createSlice, SliceCaseReducers, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-interface IList {
-  name: string;
-  id: number;
-}
 
 interface IState {
   title: string;
@@ -14,11 +11,8 @@ interface IState {
 export const getIndexList = createAsyncThunk(
   'index/getList',
   async () => {
-    const res = await fetch('http://localhost:3030/api/list');
-    if (res.ok) {
-      const list = res.json();
-      return list
-    }
+    const res = await axios.get('http://localhost:3030/api/list');
+    return res.data;
   }
 )
 
@@ -36,8 +30,18 @@ export const indexSlice = createSlice<IState, SliceCaseReducers<IState>>({
   },
   extraReducers(builder) {
     builder
+      .addCase(getIndexList.pending, (state, action) => {
+        console.log('pending')
+        console.log(action, 'action');
+        console.log(state, 'state');
+      })
       .addCase(getIndexList.fulfilled, (state, action) => {
         state['list'] = action.payload.list;
+      })
+      .addCase(getIndexList.rejected, (state, action) => {
+        console.log('rejected')
+        console.log(action, 'action');
+        console.log(state, 'state');
       })
   },
 })

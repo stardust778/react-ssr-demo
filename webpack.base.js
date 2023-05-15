@@ -4,13 +4,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx|ts|tsx)$/,
+        test: /\.(tsx|ts|jsx|js)$/,
         loader: 'esbuild-loader',
         options: {
           loader: 'tsx',
           target: 'es2015'
         },
         exclude: [/node_modules/],
+        include: path.resolve(__dirname, 'src')
       }
     ]
   },
