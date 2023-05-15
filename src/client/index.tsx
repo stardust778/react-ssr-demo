@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-// import { clientStore } from '@/store';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import indexSlice from '@/store/indexSlice';

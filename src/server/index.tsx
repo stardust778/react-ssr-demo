@@ -1,13 +1,14 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom/server';
-import { matchRoutes } from 'react-router-dom';
+import { StaticRouter, StaticRouterProps  } from 'react-router-dom/server';
+import { matchRoutes  } from 'react-router-dom';
 import express, { Request, Response } from 'express';
 import path from 'path';
 import { serverStore } from '@/store';
 import { Provider } from 'react-redux';
 import routes from '@/router';
 import PageViews from '@/utils/renderRoutes';
+
 
 const app = express();
 app.use(express.static(path.resolve(process.cwd(), 'client_build')));
@@ -30,11 +31,11 @@ app.get('*', (req: Request, res: Response) => {
       promises.push(routeMap.get(item.pathname));
     }
   })
-  console.log(promises, 'promises123123123');
+  // console.log(promises, 'promises123123123');
   // 执行所有网络请求
   Promise.all(promises).then((data) => {
-    console.log(data, 'data')
-    console.log('promises执行完毕')
+    // console.log(data, 'data')
+    // console.log('promises执行完毕')
     const content = renderToString(
       <Provider store={serverStore}>
         <StaticRouter location={req.url}>

@@ -1,18 +1,19 @@
 import React, { FC, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { useAppSelector, useAppDisaptch, RootState, AppDispatch } from '@/store';
 import { addCount, getIndexList } from '@/store/indexSlice';
 
 
-const App: FC & ISSRFunction = function() {
+const App: FC & ISSRFunction = function(props) {
   const { count, title, list } = useAppSelector((state) => state.index);
   const dispatch = useAppDisaptch();
 
   // 客户端异步请求
-  // useEffect(() => {
-  //   dispatch(getIndexList());
-  // }, [dispatch]);
+  useEffect(() => {
+    if (list.length === 0) {
+      dispatch(getIndexList());
+    }
+  }, [dispatch]);
 
   return (
     <div>
@@ -34,18 +35,6 @@ const App: FC & ISSRFunction = function() {
   )
 }
 
-// const mapStateToProps = (state: RootState) => ({
-//   list: state.index.list
-// });
-
-// const mapDispatchToProps = (dispatch: AppDispatch) => ({
-//   getIndexList: () => {
-//     dispatch(getIndexList());
-//   }
-// });
-
-// const storeApp = connect(mapStateToProps, mapDispatchToProps)(App);
-// storeApp.getInitProps = (store: any) => store.dispatch(getIndexList());
 App.getInitProps = (store: any) => store.dispatch(getIndexList());
 
 

@@ -10,4 +10,20 @@ module.exports = merge(baseConfig, {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'client_build')
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          }
+        ]
+      }
+    ]
+}
 })

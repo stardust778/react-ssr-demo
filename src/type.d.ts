@@ -1,4 +1,8 @@
-type LoadData = (store: any) => any;
+declare module '*css' {
+  const content: { [className: string]: string };
+  export default content;
+}
+
 interface IRoute {
   path: string;
   loadData?: (store: any) => any;
